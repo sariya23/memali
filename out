@@ -1,0 +1,24 @@
+
+Modified Source Code:
+package main
+
+type MyStruct struct {
+	c128 complex128
+	s    string
+
+	m   map[int]int
+	f64 float64
+
+	arr [3]int64
+	sl  []int
+	p   *int
+
+	ch  chan int
+	i32 int32
+	f32 float32
+	i16 int16
+	u16 uint16
+	i8  int8
+	u8  uint8
+	b   bool
+}

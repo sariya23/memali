@@ -125,3 +125,13 @@ type ChanType struct {
 	Name  string
 	Value interface{}
 }
+
+type RuneType struct {
+	Name  string
+	Value rune
+}
+
+type ByteType struct {
+	Name  string
+	Value byte
+}

@@ -32,7 +32,7 @@ func formatGoCode(code string) (string, error) {
 // - если это определение структуры, то есть в строке есть type
 //
 // - если строка - }
-func FindField(code string) ([]string, error) {
+func FindFields(code string) ([]string, error) {
 	var res []string
 	formattedCode, err := formatGoCode(code)
 	if err != nil {

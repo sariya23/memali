@@ -55,7 +55,7 @@ func TestParseCode(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			fields, err := memali.FindField(tc.code)
+			fields, err := memali.FindFields(tc.code)
 			if err != nil {
 				t.Errorf("got unexpected error: %v", err)
 			}
