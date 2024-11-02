@@ -12,8 +12,7 @@ import (
 	"sort"
 )
 
-func getTypeWeight(expr ast.Expr) int {
-	wordSize := getWordSize()
+func getTypeWeight(expr ast.Expr, wordSize int) int {
 	var typeAndItWeight = map[string]int{
 		"int":        wordSize,
 		"int8":       8,
@@ -40,7 +39,7 @@ func getTypeWeight(expr ast.Expr) int {
 		if t.Len == nil {
 			return 3 * wordSize
 		}
-		return getTypeWeight(t.Elt)
+		return getTypeWeight(t.Elt, wordSize)
 	case *ast.MapType:
 		return wordSize
 	case *ast.StarExpr:
@@ -104,8 +103,8 @@ type MyStruct struct {
 		if typeSpec, ok := n.(*ast.TypeSpec); ok {
 			if structType, ok := typeSpec.Type.(*ast.StructType); ok {
 				sort.Slice(structType.Fields.List, func(i, j int) bool {
-					typeI := getTypeWeight(structType.Fields.List[i].Type)
-					typeJ := getTypeWeight(structType.Fields.List[j].Type)
+					typeI := getTypeWeight(structType.Fields.List[i].Type, 64)
+					typeJ := getTypeWeight(structType.Fields.List[j].Type, 64)
 					return typeI > typeJ
 				})
 			}
