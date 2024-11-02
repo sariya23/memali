@@ -9,13 +9,13 @@ import (
 	"go/parser"
 	"go/token"
 	"log"
-	"memali/memali"
+	"memali/internal/memali"
 	"os"
 )
 
 func main() {
 	filename := mustParseFilePath()
-
+	wordSize := memali.GetWordSize()
 	fset := token.NewFileSet()
 	node, err := parser.ParseFile(fset, filename, nil, parser.ParseComments)
 	if err != nil {
@@ -32,7 +32,7 @@ func main() {
 				continue
 			}
 			if structType, ok := typeSpec.Type.(*ast.StructType); ok {
-				memali.SortStructFields(structType, 64)
+				memali.SortStructFields(structType, wordSize)
 			}
 		}
 		return true
@@ -40,11 +40,11 @@ func main() {
 
 	var buf bytes.Buffer
 	if err := format.Node(&buf, fset, node); err != nil {
-		log.Fatalf("formatting node: %w", err)
+		log.Fatalf("formatting node: %v", err)
 	}
 
 	if err := os.WriteFile(filename, buf.Bytes(), 0644); err != nil {
-		log.Fatalf("writing file: %w", err)
+		log.Fatalf("writing file: %v", err)
 	}
 
 	fmt.Printf("Struct fields in %s have been sorted memory alignmenty.\n", filename)
