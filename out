@@ -3,22 +3,21 @@ Modified Source Code:
 package main
 
 type MyStruct struct {
-	c128 complex128
-	s    string
+	sl   []int // 192 bit
+	arr  [3]string // 128 bit
+	c128 complex128 // 128 bit
+	s    string // 128 bit
 
-	m   map[int]int
-	f64 float64
+	m   map[int]int // 64 bit
+	f64 float64 // 64 bit
+	p   *int // 64 bit
 
-	arr [3]int64
-	sl  []int
-	p   *int
-
-	ch  chan int
-	i32 int32
-	f32 float32
-	i16 int16
-	u16 uint16
-	i8  int8
-	u8  uint8
-	b   bool
+	ch  chan int // 64 bit
+	i32 int32 // 32 bit
+	f32 float32 // 32 bit
+	i16 int16 // 16 bit
+	u16 uint16 // 16 bit
+	i8  int8 // 8 bit
+	u8  uint8 // 8 bit
+	b   bool // 8 bit
 }

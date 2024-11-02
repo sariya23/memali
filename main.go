@@ -31,13 +31,15 @@ var d = map[string]int{
 	"complex128": 128,
 }
 
+// Неправильно сортируются поля
 func getTypeName(expr ast.Expr) int {
 	switch t := expr.(type) {
 	case *ast.Ident:
 		return d[t.Name]
-	case *ast.SliceExpr:
-		return 3 * word
 	case *ast.ArrayType:
+		if t.Len == nil {
+			return 3 * word
+		}
 		return getTypeName(t.Elt)
 	case *ast.MapType:
 		return word
@@ -74,7 +76,7 @@ type MyStruct struct {
     u16  uint16       
     i8   int8         
     u8   uint8         
-    b    bool          
+    b    bool      
 }
 	`
 
@@ -97,7 +99,6 @@ type MyStruct struct {
 		return true
 	})
 
-	// Выводим измененный код
 	fmt.Println("\nModified Source Code:")
 	err = format.Node(os.Stdout, fset, node)
 	if err != nil {
