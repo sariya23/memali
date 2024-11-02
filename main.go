@@ -13,7 +13,7 @@ import (
 
 const word = 64
 
-var d = map[string]int{
+var typesAndWights = map[string]int{
 	"int":        word,
 	"int8":       8,
 	"int16":      16,
