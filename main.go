@@ -29,6 +29,7 @@ var d = map[string]int{
 	"float64":    64,
 	"complex64":  64,
 	"complex128": 128,
+	"uintptr":    word,
 }
 
 // Неправильно сортируются поля
@@ -67,8 +68,10 @@ type MyStruct struct {
     c128 complex128   
     s    string      
     arr  [3]string      
-    sl   []int       
-    m    map[int]int   
+    sl   []int
+	cq [3]complex128       
+    m    map[int]int  
+	ui uintptr 
     ch   chan int      
     i32  int32         
     f32  float32     

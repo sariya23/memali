@@ -10,6 +10,7 @@ type s struct {
 	a [3]bool
 	c []int
 	k chan int
+	j uintptr
 }
 
 func main() {
@@ -19,4 +20,5 @@ func main() {
 	fmt.Println(unsafe.Alignof(a.b))
 	fmt.Println(unsafe.Alignof(a.c))
 	fmt.Println(unsafe.Alignof(a.k))
+	fmt.Println(unsafe.Alignof(a.j))
 }
