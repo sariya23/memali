@@ -118,3 +118,11 @@ type MyStruct struct {
 		log.Fatalf("Failed to format modified code: %v", err)
 	}
 }
+
+func SortStructFields(structType *ast.StructType, wordSize int) {
+	sort.Slice(structType.Fields.List, func(i, j int) bool {
+		typeI := getTypeWeight(structType.Fields.List[i].Type, wordSize)
+		typeJ := getTypeWeight(structType.Fields.List[j].Type, wordSize)
+		return typeI > typeJ
+	})
+}
