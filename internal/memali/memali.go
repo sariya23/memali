@@ -30,6 +30,7 @@ func getTypeWeight(expr ast.Expr, wordSize int) int {
 	case *ast.Ident:
 		return typeAndItWeight[t.Name]
 	case *ast.ArrayType:
+		// slice case
 		if t.Len == nil {
 			return 3 * wordSize
 		}
@@ -65,8 +66,11 @@ func GetWordSize() int {
 
 func SortStructFields(structType *ast.StructType, wordSize int) {
 	sort.Slice(structType.Fields.List, func(i, j int) bool {
-		typeI := getTypeWeight(structType.Fields.List[i].Type, wordSize)
-		typeJ := getTypeWeight(structType.Fields.List[j].Type, wordSize)
-		return typeI > typeJ
+		wI := getTypeWeight(structType.Fields.List[i].Type, wordSize)
+		wJ := getTypeWeight(structType.Fields.List[j].Type, wordSize)
+		if wI == wJ {
+			return
+		}
+		return wI > wJ
 	})
 }
